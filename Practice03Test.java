@@ -51,14 +51,65 @@ public class Practice03Test {
 		}
 	}
 
-
-	public int find_min_iterative () {
+	// This method finds the minimum value of an array iteratively.
+	public int find_min_iterative (double[] arr) // FINAL RUNTIME: O(n)
+	{
 		// TODO: Fill in this iterative function.
+
+		// Data Member.
+		int min = 0; // O(1)
+
+		// Loops through array.
+		for (int i = 1; i < arr.length; i++) // O(n)
+		{
+			// Conditional for if a value is less than minimum.
+			if (arr[i] < arr[min]) // O(n)
+			{
+				// Updates minimum value.
+				min = i; // O(n)
+			}
+		}
+
+		// Returns final min value.
+		return min; // O(1)
 	}
 
 
-	public int find_min_recursive () {
+	// This method finds the minimum value of an array recursively. 
+	public int find_min_recursive (double[] arr, int count, int min) // FINAL RUNTIME: O(n^2)
+	{
 		// TODO: Fill in this recursive function.
+
+		// Base case.
+		if (count == arr.length)
+		{
+			return min; // O(1)
+		}
+
+		// Conditional for if a value is less than current min.
+		if (arr[count] < arr[min])
+		{
+			// Updates min and calls method again.
+			min = count;
+			return find_min_recursive(arr, count + 1, min); // O(n^2)
+		}
+
+		// Conditional for if a value is anything other than less than current min.
+		else
+		{
+			// Calls method again. 
+			return find_min_recursive(arr, count + 1, min); // O(n^2)
+		}
+	}
+
+	// This method instantiates some of the variables that will be needed later in find_min_recursive.
+	public int find_min_recursive () {
+		// Data Members
+		int min = 0; // O(1)
+		int count = 1; // O(1)
+
+		// Calls method to find minimum value recursively.
+		return find_min_recursive(arr, count, min); // O(1)
 	}
 
 
@@ -67,7 +118,7 @@ public class Practice03Test {
 	 * ... and prints them both.
 	 */
 	public void print_min() {
-		System.out.println("Iteratively determined min at index " + find_min_iterative());
+		System.out.println("Iteratively determined min at index " + find_min_iterative(arr));
 		System.out.println("Recursively determined min at index " + find_min_recursive());
 	}
 
